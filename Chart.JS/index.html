@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Clima - Atividade de Chart.JS </title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard de Clima</h1>
+  </header>
+
+  <main class="dashboard">
+    <section class="card">
+      <h2>Temperatura e Umidade por Horário</h2>
+      <div class="chart-container">
+        <canvas id="graficoLinhas"></canvas>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Temperatura e Umidade Médias por Mês</h2>
+      <div class="chart-container">
+        <canvas id="graficoBarras"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== CORES (é só trocar aqui) =====
+    const corTemperatura = '#ff8c00'; // laranja
+    const corUmidade = '#8b4513';     // marrom
+
+    //grafico de linha
+    new Chart(document.getElementById('graficoLinhas'), {
+      type: 'line',
+      data: {
+        labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+        datasets: [
+          {
+            label: 'Temperatura (°C)',
+            data: [30, 29, 28, 25, 22, 23],
+            borderColor: corTemperatura,
+            backgroundColor: corTemperatura,
+            tension: 0.3
+          },
+          {
+            label: 'Umidade (%)',
+            data: [80, 82, 80, 85, 80, 83],
+            borderColor: corUmidade,
+            backgroundColor: corUmidade,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // grafico de barras
+    new Chart(document.getElementById('graficoBarras'), {
+      type: 'bar',
+      data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+        datasets: [
+          {
+            label: 'Temperatura Média (°C)',
+            data: [22, 24, 27, 23, 20, 18],
+            backgroundColor: corTemperatura
+          },
+          {
+            label: 'Umidade Média (%)',
+            data: [90, 89, 93, 87, 88, 82],
+            backgroundColor: corUmidade
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
